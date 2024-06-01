@@ -6,6 +6,7 @@ package customer;
 
 service Customer {
 	rpc GetCustomers (GetCustomersQuery) returns (CustomerList);
+	rpc GetCustomersStream (GetCustomersStreamQuery) returns (stream CustomerResponse);
 	rpc GetCustomerById (GetCustomerByIdQuery) returns (CustomerResponse);
 	rpc CreateCustomer (CreateCustomerRequest) returns (CustomerResponse);
 	rpc UpdateCustomer (UpdateCustomerRequest) returns (CustomerResponse);
@@ -27,6 +28,11 @@ message CustomerList {
 
 // Queries
 message GetCustomersQuery {
+	int32 pageNumber = 1;
+	int32 pageSize = 2;
+}
+
+message GetCustomersStreamQuery {
 	int32 pageNumber = 1;
 	int32 pageSize = 2;
 }
