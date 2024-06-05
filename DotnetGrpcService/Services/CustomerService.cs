@@ -3,9 +3,11 @@ using Dapper;
 using DotnetGrpcService.Common.Abstractions;
 using DotnetGrpcService.Protos;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetGrpcService.Services
 {
+    [Authorize]
     public class CustomerService : Customer.CustomerBase
     {
         private readonly ILogger<CustomerService> _logger;
@@ -44,7 +46,9 @@ namespace DotnetGrpcService.Services
             IServerStreamWriter<CustomerResponse> responseStream,
             ServerCallContext context)
         {
-            using(var connection = _factory.CreateConnection())
+            var user = context.GetHttpContext().User;
+
+            using (var connection = _factory.CreateConnection())
             {
                 IEnumerable<CustomerResponse> customers = await connection
                     .QueryAsync<CustomerResponse>("SELECT * FROM Customers");
@@ -52,7 +56,6 @@ namespace DotnetGrpcService.Services
                 foreach(CustomerResponse customer in customers)
                 {
                     await responseStream.WriteAsync(customer);
-                    await Task.Delay(1000);
                 }
             }
         }

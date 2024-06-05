@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetGrpcService.Client.Protos";
+
+package auth;
+
+service Auth {
+	rpc Login (LoginQuery) returns (LoginResponse);
+}
+
+message LoginQuery {
+	string Email = 1;
+	string Passwrod = 2;
+}
+
+message LoginResponse {
+	string Token = 1;
+}
