@@ -1,0 +1,31 @@
+{
+  "name": "grpc-react-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "proto:gen": "sh ./proto-gen.sh"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.8",
+    "@grpc/proto-loader": "^0.7.13",
+    "google-protobuf": "^3.21.2",
+    "grpc-tools": "^1.12.4",
+    "grpc-web": "^1.5.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "protoc-gen-ts": "^0.8.7",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package customer;
+
+service Customer {
+	rpc GetCustomers (GetCustomersQuery) returns (CustomerList);
+	rpc GetCustomersStream (GetCustomersStreamQuery) returns (stream CustomerResponse);
+	rpc GetCustomerById (GetCustomerByIdQuery) returns (CustomerResponse);
+	rpc CreateCustomer (CreateCustomerRequest) returns (CustomerResponse);
+	rpc UpdateCustomer (UpdateCustomerRequest) returns (CustomerResponse);
+	rpc DeleteCustomer (DeleteCustomerRequest) returns (CustomerResponse);
+}
+
+// Responses
+message CustomerResponse {
+	string customerId = 1;
+    string name = 2;
+    string lastName = 3;
+    string email = 4;
+    string address = 5;
+}
+
+message CustomerList {
+	repeated CustomerResponse customers = 1;
+}
+
+// Queries
+message GetCustomersQuery {
+	int32 pageNumber = 1;
+	int32 pageSize = 2;
+}
+
+message GetCustomersStreamQuery {
+	int32 pageNumber = 1;
+	int32 pageSize = 2;
+}
+
+message GetCustomerByIdQuery {
+	string CustomerId = 1;
+}
+
+// Create
+message CreateCustomerRequest {
+	string name = 1;
+	string lastName = 2;
+	string email =3;
+	string address = 4;
+}
+
+// Update 
+message UpdateCustomerRequest {
+	string customerId = 1;
+	string name = 2;
+	string lastName = 3;
+	string email = 4;
+	string address = 5;
+}
+
+// Delete
+message DeleteCustomerRequest{
+	string customerId = 1;
+}
